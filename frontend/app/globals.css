@@ -1,0 +1,190 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Entolux Design System - Warm, earthy, natural history aesthetic */
+  --background: #F5F0E8;
+  --foreground: #2C1F0E;
+  --card: #EDE5D8;
+  --card-foreground: #2C1F0E;
+  --popover: #EDE5D8;
+  --popover-foreground: #2C1F0E;
+  --primary: #228B22;
+  --primary-foreground: #F5F0E8;
+  --secondary: #AC9484;
+  --secondary-foreground: #2C1F0E;
+  --muted: #E8DFD0;
+  --muted-foreground: #6B5744;
+  --accent: #D6CBBA;
+  --accent-foreground: #2C1F0E;
+  --destructive: #A0522D;
+  --destructive-foreground: #F5F0E8;
+  --border: #D4C5B0;
+  --input: #EDE5D8;
+  --ring: #228B22;
+  --divider: #C8B89A;
+  --badge: #D6CBBA;
+  --nav: #E8DFD0;
+  --success: #2E7D32;
+  --warning: #A0522D;
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-divider: var(--divider);
+  --color-badge: var(--badge);
+  --color-nav: var(--nav);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Entolux Custom Animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+@keyframes moth-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(25vw, -20px);
+  }
+  50% {
+    transform: translate(50vw, 0);
+  }
+  75% {
+    transform: translate(75vw, 20px);
+  }
+  100% {
+    transform: translate(100vw, 0);
+  }
+}
+
+@keyframes bar-grow {
+  from { width: 0; }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; }
+  30% { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 350ms ease forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 400ms ease-out forwards;
+}
+
+.animate-breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.animate-moth-drift {
+  animation: moth-drift 12s ease-in-out infinite;
+}
+
+.animate-bar-grow {
+  animation: bar-grow 600ms ease-out forwards;
+}
+
+.typing-dot {
+  animation: typing-dot 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Staggered card animations */
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
+.stagger-5 { animation-delay: 400ms; }
+.stagger-6 { animation-delay: 480ms; }
+.stagger-7 { animation-delay: 560ms; }
+.stagger-8 { animation-delay: 640ms; }
+
+/* Custom scrollbar for horizontal scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Soft box shadow */
+.shadow-soft {
+  box-shadow: 0 4px 12px rgba(44, 31, 14, 0.08);
+}
+
+.shadow-soft-lg {
+  box-shadow: 0 8px 24px rgba(44, 31, 14, 0.08);
+}

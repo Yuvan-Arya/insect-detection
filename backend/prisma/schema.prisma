@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  password String
+  user_type String 
+  time_created DateTime @default(now())
+}
+
+model Box{
+  id String @id  @default(cuid())
+  box_name String?
+  box_id_default String @unique 
+  species Species[]
+}
+model Species{
+  id String @id @default(cuid())
+  taxon_id BigInt 
+  name String
+  confidence_score Int 
+  kingdom String?
+  class String? 
+  order String?
+  family String?
+  genus String?
+  species String?
+  observation_string String?
+  image_string String? 
+  wikipedia_string String? 
+  box_id String
+  box Box @relation(fields:[box_id],references:[box_id_default])
+}

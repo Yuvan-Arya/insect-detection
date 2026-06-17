@@ -1,0 +1,34 @@
+[Unit]
+Description=Forest Wildlife Camera Trap
+After=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/CREATED-YUVAN
+ExecStart=/usr/bin/python3 main.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Give the service time to save captures on shutdown
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target
+
+# ── Installation ────────────────────────────────────────────
+# Copy this file to systemd:
+#   sudo cp forest_trap.service /etc/systemd/system/
+#
+# Enable and start:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable forest_trap.service
+#   sudo systemctl start forest_trap.service
+#
+# Check status:
+#   sudo systemctl status forest_trap.service
+#
+# View logs:
+#   journalctl -u forest_trap.service -f
