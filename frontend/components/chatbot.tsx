@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { MothIcon } from "./moth-icon"
 import { chatResponses } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/lib/auth-context"
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
 
@@ -70,6 +71,7 @@ export function useChatbot() {
 }
 
 export function ChatbotProvider({ children }: ChatbotProviderProps) {
+  const { isAuthenticated } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [pendingQuery, setPendingQuery] = useState<string | undefined>()
 
@@ -91,13 +93,17 @@ export function ChatbotProvider({ children }: ChatbotProviderProps) {
   return (
     <ChatbotContext.Provider value={{ isOpen, open, close, toggle }}>
       {children}
-      <ChatbotPanel 
-        isOpen={isOpen} 
-        onClose={close} 
-        pendingQuery={pendingQuery}
-        onQueryConsumed={() => setPendingQuery(undefined)}
-      />
-      <ChatbotToggleButton isOpen={isOpen} onClick={toggle} />
+      {isAuthenticated && (
+        <>
+          <ChatbotPanel 
+            isOpen={isOpen} 
+            onClose={close} 
+            pendingQuery={pendingQuery}
+            onQueryConsumed={() => setPendingQuery(undefined)}
+          />
+          <ChatbotToggleButton isOpen={isOpen} onClick={toggle} />
+        </>
+      )}
     </ChatbotContext.Provider>
   )
 }

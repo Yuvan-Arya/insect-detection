@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, ReactNode, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { boxes as initialBoxes, type Box, type Capture } from "./mock-data"
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
@@ -34,6 +35,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
   const [boxes, setBoxes] = useState<Box[]>(initialBoxes)
   const [selectedBox, setSelectedBox] = useState<Box | "all" | null>("all")
@@ -246,6 +248,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = () => {
     localStorage.removeItem("token")
     setUser(null)
+    router.push("/auth")
   }
 
   const selectBox = (box: Box | "all" | null) => {
