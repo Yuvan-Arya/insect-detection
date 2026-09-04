@@ -123,7 +123,7 @@ app.post("/chat", async (req, res) => {
     const { chat_context } = req.body;
     const instruction = sysIns(chat_context);
     const completion = await client.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+        model: "openai/gpt-oss-120b",
         messages: [
             {
                 role: "user",
@@ -346,7 +346,7 @@ Return ONLY the raw JSON object. Do not wrap in markdown blocks or include any c
             ? `Here are the captured species for Box ${box_id || "All"}:\n${speciesSummary}`
             : `No species have been detected yet for Box ${box_id || "All"}.`;
         const completion = await client.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: userMessage }
