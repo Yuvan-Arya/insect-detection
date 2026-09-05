@@ -144,7 +144,7 @@ app.post("/chat",async(req:Request,res:Response)=>{
       },
     ],
     temperature: 1,
-    max_completion_tokens: 100,
+    max_completion_tokens: 1024,
     top_p: 1,
     stream: true,
     stop: null,
